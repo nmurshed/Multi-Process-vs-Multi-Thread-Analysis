@@ -201,17 +201,29 @@ int main (int argc , char *argv[]) {
     for (int k=0; k<prod; k++)
     {
         pthread_create(&thread[k],NULL,producer,NULL);
-        pthread_join(&thread[k],NULL);
+       
     }
     
     for (int k=0; k<cons; k++)
     {
         int t = prod+k;
         pthread_create(&thread[t],NULL,consumer,NULL);
-        pthread_join(&thread[t],NULL);
+  
     }
     
-    
+	 for (int k=0; k<prod; k++)
+    {
+       pthread_join(&thread[k],NULL);
+       
+    }
+	 for (int k=0; k<cons; k++)
+    {
+        int t = prod+k;
+        pthread_join(&thread[t],NULL);
+  
+    }
+	  
+    	
     
     gettimeofday(&timer_prod_start,NULL);
     
